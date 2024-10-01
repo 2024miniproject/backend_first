@@ -9,7 +9,13 @@ branch_labels = None
 depends_on = None
 
 def upgrade():
-    pass  # 필요한 업그레이드 코드를 여기에 추가
+        op.create_table(
+            'posts',
+            sa.Column('id', sa.Integer(), nullable=False),
+            sa.Column('title', sa.String(length=200), nullable=False),
+            sa.Column('content', sa.Text(), nullable=False),
+            sa.PrimaryKeyConstraint('id')
+        )
 
 def downgrade():
     pass  # 필요한 다운그레이드 코드를 여기에 추가

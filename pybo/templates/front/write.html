@@ -1,89 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>판매글 작성</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bar.css">
-    <link rel="stylesheet" href="write.css">
-    <link rel="stylesheet" href="writebody.css">
-</head>
+<form action="{{ url_for('write_views.write') }}" method="post" enctype="multipart/form-data"> <!-- 수정된 부분 -->
+    <div class="title">제목</div>
+    <textarea class="titlearea" name="title" placeholder="제목을 입력하세요!" required></textarea>
+    <hr class="line1">
+    <div class="price">가격</div>
+    <textarea class="pricearea" name="price" placeholder="이번 제품은 얼마인가요?" required></textarea>
+    <hr class="line2">
 
-<body>
-    <div class="writepage"></div>  
-    <side>
-        <div class="sidebar">
-            <div class="logo">
-                <img src="logo.png" alt="Logo">
-                <button class="plus-button" onclick="window.open('write.html')">+</button>
-            </div>
-        
-            <ul class="menu">
-                <li><a href="home2.html"><span class="icon">🏠</span> Home</a></li>
-                <li><a href="mydeal.html"><span class="icon">📦</span> My deal</a></li>
-                <li><a href="info.html"><span class="icon">ℹ️</span> Info</a></li>
-            </ul>
-        </div>
-    </side>       
-    <div class="backbox"></div>
-    <div class="writebox">
-        <!--꾸밈원-->
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="circle3"></div>
+    <label class="upload-box" for="file-upload">
+        <span class="upload-icon">+</span>
+    </label>
+    <input id="file-upload" type="file" name="files" accept="image/*" multiple style="display: none;">
 
-        <!--내용-->
-        <div class="title">제목</div>
-        <textarea class="titlearea" placeholder="제목을 입력하세요!"></textarea>
-        <hr class="line1">
-        <div class="price">가격</div>
-        <textarea class="pricearea" placeholder="이번 제품은 얼마인가요?"></textarea>
-        <hr class="line2">
+    <div id="image-container"></div>
 
-        <!--업로드된 사진이 하단에 뜰 수 있게-->
-
-        <!-- 사진 업로드 버튼 -->
-        <label class="upload-box" for="file-upload">
-            <span class="upload-icon">+</span>
-        </label>
-        <input id="file-upload" type="file" accept="image/*" multiple onchange="handleFile(event)" style="display: none;">
-
-        <!-- 이미지 컨테이너 -->
-        <div id="image-container"></div>
-        <div id="rectangle-container"></div>
-
-        
-        <!-- 사진 업로드 스크립트 -->
-        <script src="pictureupload.js"></script>
-
-        <!-- 사용자가 내용을 입력하는 부분 -->
-        <textarea class="textarea" placeholder="내용을 입력하세요." rows="1" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';"></textarea>
-
-        <!--발행하기-->
-        <button class="publish-button" onclick="publishContent()">발행하기</button>
-
-        <!--백엔드 서버로 내용을 보내야 하는 부분 예시
-            <script>
-                function handleFile(event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        console.log("업로드한 파일:", file.name);
-                        // 파일을 서버에 전송하는 로직을 추가할 수 있습니다.
-                    }
-                }
-
-                function publishContent() {
-                    const content = document.querySelector('.textarea').value;
-                    console.log("발행할 내용:", content);
-                    // 서버에 내용 전송하는 로직 추가 가능
-                }
-            </script>-->
+    <div class="textarea-wrapper">
+        <textarea class="textarea" name="content" placeholder="내용을 입력하세요." rows="1" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';" required></textarea>
     </div>
 
-</body>
-</html>
-
-</html>
-
-        <!--사진 넣는 것 참고 --
-        https://velog.io/@minkyeong-ko/HTMLCSSJS-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C-%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%A6%84-%EB%82%98%ED%83%80%EB%82%B4%EA%B8%B0-%ED%99%94%EB%A9%B4%EC%97%90-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B3%B4%EC%97%AC%EC%A3%BC%EA%B8%B0-->
+    <button class="publish-button" type="submit">발행하기</button>
+</form>
